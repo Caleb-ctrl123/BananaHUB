@@ -465,39 +465,38 @@ function Tab:CreateSlider(options)
     end)
 
     BarBackground.InputEnded:Connect(function(input)
-        if input.UserInput
-                        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = false
         end
     end)
 
-    UserInputService.InputChanged:Connect(function(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            setValueFromX(input.Position.X)
-        end
-    end)
+UserInputService.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        setValueFromX(input.Position.X)
+    end
+end)
 
-    task.defer(function()
-        if BarBackground.AbsoluteSize.X > 0 then
-            setValueFromX(
-                BarBackground.AbsolutePosition.X +
-                BarBackground.AbsoluteSize.X * ((default - min) / (max - min))
-            )
-        end
-    end)
+task.defer(function()
+    if BarBackground.AbsoluteSize.X > 0 then
+        setValueFromX(
+            BarBackground.AbsolutePosition.X +
+            BarBackground.AbsoluteSize.X * ((default - min) / (max - min))
+        )
+    end
+end)
 
-    return {
-        Set = function(v)
-            v = math.clamp(v, min, max)
-            value = v
-            Label.Text = name .. " (" .. tostring(value) .. ")"
-            Fill.Size = UDim2.new((value - min) / (max - min), 0, 1, 0)
-            callback(value)
-        end,
-        Get = function()
-            return value
-        end
-    }
+return {
+    Set = function(v)
+        v = math.clamp(v, min, max)
+        value = v
+        Label.Text = name .. " (" .. tostring(value) .. ")"
+        Fill.Size = UDim2.new((value - min) / (max - min), 0, 1, 0)
+        callback(value)
+    end,
+    Get = function()
+        return value
+    end
+}
 end
 
 return BananaUI
