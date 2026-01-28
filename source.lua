@@ -1,16 +1,9 @@
---[[
-    This was created by me ONLY, there are no credits to give
-]]--
-
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
 local BananaUI = {}
 BananaUI.__index = BananaUI
 
------------------------------------------------------------
--- BOOTUP
------------------------------------------------------------
 local function BananaBoot(introText)
     local ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "BananaBoot"
@@ -81,9 +74,6 @@ local function BananaBoot(introText)
     ScreenGui:Destroy()
 end
 
------------------------------------------------------------
--- DRAGGING UTILITY
------------------------------------------------------------
 local function MakeDraggable(topbar, frame)
     local dragging = false
     local dragStart, startPos
@@ -115,9 +105,6 @@ local function MakeDraggable(topbar, frame)
     end)
 end
 
------------------------------------------------------------
--- UTILITY
------------------------------------------------------------
 local function create(class, props, children)
     local obj = Instance.new(class)
     for k, v in pairs(props or {}) do
@@ -129,9 +116,6 @@ local function create(class, props, children)
     return obj
 end
 
------------------------------------------------------------
--- WINDOW
------------------------------------------------------------
 local Window = {}
 Window.__index = Window
 
@@ -188,8 +172,7 @@ function BananaUI:CreateWindow(options)
     })
 
     TopBar.Parent = MainFrame
-
-    -- ⭐ MAKE WINDOW DRAGGABLE
+    
     MakeDraggable(TopBar, MainFrame)
 
     local TabHolder = create("Frame", {
@@ -240,9 +223,6 @@ function BananaUI:CreateWindow(options)
     return windowObj
 end
 
------------------------------------------------------------
--- TAB
------------------------------------------------------------
 local Tab = {}
 Tab.__index = Tab
 
@@ -315,9 +295,6 @@ function Window:CreateTab(options)
     return tabObj
 end
 
------------------------------------------------------------
--- BUTTON
------------------------------------------------------------
 function Tab:CreateButton(options)
     options = options or {}
     local name = options.Name or "Button"
@@ -352,9 +329,6 @@ function Tab:CreateButton(options)
     return Button
 end
 
------------------------------------------------------------
--- TOGGLE
------------------------------------------------------------
 function Tab:CreateToggle(options)
     options = options or {}
     local name = options.Name or "Toggle"
@@ -421,9 +395,6 @@ function Tab:CreateToggle(options)
     }
 end
 
------------------------------------------------------------
--- SLIDER
------------------------------------------------------------
 function Tab:CreateSlider(options)
     options = options or {}
     local name = options.Name or "Slider"
@@ -529,7 +500,4 @@ function Tab:CreateSlider(options)
     }
 end
 
------------------------------------------------------------
--- RETURN LIBRARY
------------------------------------------------------------
 return BananaUI
